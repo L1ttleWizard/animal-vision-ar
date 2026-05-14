@@ -1,0 +1,231 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand colors */
+  --color-bg-deep: #0F1A0C;
+  --color-bg-mid: #1F2A1A;
+  --color-bg-soft: #2C3520;
+  --color-gold-100: #FFF1B8;
+  --color-gold-200: #F4D67A;
+  --color-gold-300: #D4AF6F;
+  --color-gold-400: #B8924E;
+  --color-gold-500: #8C6C36;
+  --color-cream: #F5EFD9;
+  --color-ink: #E9E2C8;
+  --color-muted: #9C9879;
+
+  --shadow-gold-glow: 0 0 18px rgba(244, 214, 122, 0.35);
+  --shadow-inner-frame: inset 0 0 0 1px rgba(212, 175, 111, 0.45);
+}
+
+@theme inline {
+  --color-bg-deep: var(--color-bg-deep);
+  --color-bg-mid: var(--color-bg-mid);
+  --color-bg-soft: var(--color-bg-soft);
+  --color-gold-100: var(--color-gold-100);
+  --color-gold-200: var(--color-gold-200);
+  --color-gold-300: var(--color-gold-300);
+  --color-gold-400: var(--color-gold-400);
+  --color-gold-500: var(--color-gold-500);
+  --color-cream: var(--color-cream);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --font-display: "Manrope", "Aptos", "Inter", system-ui, sans-serif;
+  --font-body: "Manrope", "Aptos", "Inter", system-ui, sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: radial-gradient(
+      120% 80% at 50% 0%,
+      #233018 0%,
+      #1a230e 40%,
+      #0d1206 100%
+    ),
+    #0f1a0c;
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Decorative paw-print background pattern overlay */
+.paw-bg {
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(244, 214, 122, 0.05) 0 8px, transparent 9px),
+    radial-gradient(circle at 78% 32%, rgba(244, 214, 122, 0.04) 0 7px, transparent 8px),
+    radial-gradient(circle at 32% 64%, rgba(244, 214, 122, 0.04) 0 9px, transparent 10px),
+    radial-gradient(circle at 84% 78%, rgba(244, 214, 122, 0.05) 0 6px, transparent 7px),
+    radial-gradient(circle at 8% 88%, rgba(244, 214, 122, 0.05) 0 7px, transparent 8px);
+  background-repeat: no-repeat;
+}
+
+/* Floating sparkles overlay */
+.sparkles-bg {
+  background-image:
+    radial-gradient(2px 2px at 78% 92%, rgba(255, 224, 138, 0.85), transparent 60%),
+    radial-gradient(1.5px 1.5px at 68% 86%, rgba(255, 224, 138, 0.7), transparent 60%),
+    radial-gradient(1.8px 1.8px at 86% 80%, rgba(255, 224, 138, 0.6), transparent 60%),
+    radial-gradient(1.2px 1.2px at 60% 96%, rgba(255, 224, 138, 0.7), transparent 60%),
+    radial-gradient(1.6px 1.6px at 92% 88%, rgba(255, 224, 138, 0.8), transparent 60%);
+  background-repeat: no-repeat;
+}
+
+/* Subtle vignette */
+.vignette {
+  box-shadow: inset 0 0 80px 10px rgba(0, 0, 0, 0.55);
+}
+
+/* Golden border card */
+.card-gold {
+  border: 1px solid rgba(212, 175, 111, 0.55);
+  background: linear-gradient(
+    180deg,
+    rgba(34, 46, 21, 0.55) 0%,
+    rgba(24, 33, 14, 0.55) 100%
+  );
+  border-radius: 16px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 0 0 1px rgba(212, 175, 111, 0.08);
+}
+
+/* Pill-style action button (e.g. "ПОСМОТРЕТЬ ГЛАЗАМИ КОШКИ") */
+.pill-gold {
+  border: 1px solid rgba(212, 175, 111, 0.7);
+  background: linear-gradient(
+    180deg,
+    rgba(140, 108, 54, 0.35) 0%,
+    rgba(82, 64, 30, 0.45) 100%
+  );
+  color: var(--color-gold-100);
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  font-size: 11px;
+  padding: 8px 14px;
+  text-align: center;
+  line-height: 1.15;
+  transition: all 150ms ease;
+}
+
+.pill-gold:hover {
+  box-shadow: 0 0 12px rgba(244, 214, 122, 0.5);
+  border-color: rgba(244, 214, 122, 0.9);
+}
+
+.pill-gold[data-locked="true"] {
+  color: var(--color-gold-300);
+  opacity: 0.9;
+}
+
+/* Glowing gold accent text */
+.glow-gold {
+  color: var(--color-gold-200);
+  text-shadow: 0 0 8px rgba(244, 214, 122, 0.45),
+    0 0 18px rgba(244, 214, 122, 0.25);
+}
+
+/* Tab bar */
+.tab-active {
+  color: var(--color-gold-200);
+  filter: drop-shadow(0 0 6px rgba(244, 214, 122, 0.7));
+}
+
+/* Toggle switch */
+.toggle-track {
+  width: 38px;
+  height: 22px;
+  background: linear-gradient(180deg, #2a361b, #1a230e);
+  border: 1px solid rgba(212, 175, 111, 0.45);
+  border-radius: 9999px;
+  position: relative;
+  transition: all 150ms ease;
+  cursor: pointer;
+}
+
+.toggle-track[data-on="true"] {
+  background: linear-gradient(180deg, #a98135, #6b4f1c);
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--color-cream);
+  transition: all 150ms ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.toggle-track[data-on="true"] .toggle-thumb {
+  left: 18px;
+}
+
+/* Hide scrollbars inside phone */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Sparkle keyframes */
+@keyframes float-sparkle {
+  0%,
+  100% {
+    transform: translateY(0px);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+.animate-sparkle {
+  animation: float-sparkle 4s ease-in-out infinite;
+}
+
+/* Loading progress bar shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-gold {
+  background: linear-gradient(
+    90deg,
+    rgba(244, 214, 122, 0.4) 0%,
+    rgba(255, 241, 184, 1) 50%,
+    rgba(244, 214, 122, 0.4) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* Page transitions */
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-fade {
+  animation: page-fade-in 260ms ease-out both;
+}
