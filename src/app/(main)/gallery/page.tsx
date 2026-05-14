@@ -29,45 +29,44 @@ export default function GalleryPage() {
   };
 
   return (
-    <ScreenContainer>
-      <div className="relative">
+    <ScreenContainer className="pt-2">
+      <div className="relative mt-1">
         <button
-          className="absolute -top-1 right-0 text-cream/80 hover:text-gold-200"
+          className="absolute left-0 top-1 text-cream/80 hover:text-gold-200"
           aria-label="Настройки"
           onClick={() => router.push("/profile/settings")}
         >
-          <SettingsGearIcon className="h-6 w-6" />
+          <SettingsGearIcon className="h-[26px] w-[26px]" />
         </button>
-        <h1 className="text-center text-[22px] font-semibold tracking-[0.22em] text-cream mt-2 mb-2">
+        <h1 className="text-center text-[22px] font-semibold tracking-[0.22em] text-cream">
           ГАЛЕРЕЯ МОДЕЛЕЙ
         </h1>
-        <div className="flex items-center justify-center gap-1.5 text-[11px] tracking-[0.2em] text-gold-200">
-          <CoinIcon className="h-4 w-4" />
-          <span className="font-semibold">{coins}</span>
-          <span className="text-cream/60">очков исследования</span>
-        </div>
       </div>
 
-      <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-5">
+      <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-7">
         {ANIMALS.map((a) => {
           const isUnlocked = unlocked.includes(a.id);
           const canAfford = coins >= a.price;
           return (
             <li key={a.id} className="flex flex-col items-center text-center">
-              <div className="relative flex h-20 w-20 items-center justify-center">
+              <div className="relative flex h-[92px] w-[92px] items-center justify-center">
                 {!isUnlocked && (
-                  <PadlockIcon className="absolute -top-1 -left-1 z-10 h-4 w-4 text-cream/80" />
+                  <PadlockIcon className="absolute -top-1 left-1 z-10 h-[18px] w-[18px] text-cream/85" />
                 )}
-                <AnimalHead animal={a.id} size={86} className={isUnlocked ? "" : "opacity-90"} />
+                <AnimalHead
+                  animal={a.id}
+                  size={92}
+                  className={isUnlocked ? "" : "opacity-95"}
+                />
               </div>
-              <p className="mt-1.5 text-[13px] font-semibold tracking-[0.18em] text-cream">
+              <p className="mt-2 text-[14px] font-bold tracking-[0.22em] text-gold-100">
                 {a.name}
               </p>
               <button
                 onClick={() => handleClick(a)}
                 disabled={!isUnlocked && !canAfford}
                 data-locked={!isUnlocked}
-                className="pill-gold mt-1.5 w-full max-w-[160px] disabled:opacity-40 disabled:cursor-not-allowed"
+                className="pill-gold mt-3 w-[148px] max-w-full px-3 py-[7px] text-[10.5px] tracking-[0.06em] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isUnlocked ? (
                   <>
@@ -81,7 +80,7 @@ export default function GalleryPage() {
                     <br />
                     <span className="inline-flex items-center gap-1">
                       ЦЕНА: {a.price}
-                      <CoinIcon className="h-3 w-3 inline" />
+                      <CoinIcon className="h-[12px] w-[12px] inline" />
                     </span>
                   </>
                 )}
@@ -90,10 +89,6 @@ export default function GalleryPage() {
           );
         })}
       </ul>
-
-      <p className="mt-6 text-center text-[10px] tracking-[0.2em] text-cream/40">
-        ОТКРЫВАЙТЕ НОВЫХ ЖИВОТНЫХ ЗА ОЧКИ ИССЛЕДОВАНИЙ
-      </p>
     </ScreenContainer>
   );
 }
