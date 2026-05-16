@@ -14,8 +14,6 @@ import {
   HelpIcon,
   LogoutIcon,
   NotebookIcon,
-  SettingsGearIcon,
-  TargetIcon,
   TrophyIcon,
 } from "@/components/icons";
 
@@ -42,7 +40,7 @@ export default function ProfilePage() {
         </span>
       ),
     },
-    { label: "КВЕСТЫ", Icon: TargetIcon, href: "/quests" },
+    { label: "ПОДДЕРЖКА", Icon: HelpIcon },
     { label: "ДРУЗЬЯ", Icon: FriendsIcon, trailing: <span>{profile.friends}</span> },
     {
       label: "МОИ НАБЛЮДЕНИЯ",
@@ -56,8 +54,6 @@ export default function ProfilePage() {
       trailing: <span>{profile.favorites}</span>,
     },
     { label: "ИГРЫ", Icon: GameIcon, href: "/games" },
-    { label: "НАСТРОЙКИ", Icon: SettingsGearIcon, href: "/profile/settings" },
-    { label: "ПОДДЕРЖКА", Icon: HelpIcon },
     { label: "ВЫХОД", Icon: LogoutIcon },
   ];
 
