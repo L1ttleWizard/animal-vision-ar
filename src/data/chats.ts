@@ -6,7 +6,7 @@ export type ChatPreview = {
   lastMessage: string;
   time: string;
   unread: number;
-  avatar: AnimalId | "compass";
+  avatar: AnimalId | "compass" | "deer";
 };
 
 export type ChatMessage = {
@@ -40,7 +40,7 @@ export const CHATS: ChatPreview[] = [
     lastMessage: "Кто на метку 18 в субботу? Я иду.",
     time: "ВЧЕРА",
     unread: 0,
-    avatar: "compass",
+    avatar: "deer",
   },
   {
     id: "navigators",

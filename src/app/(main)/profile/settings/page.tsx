@@ -60,7 +60,11 @@ export default function SettingsPage() {
         </section>
 
         {/* Data + Cloud */}
-        <section className="card-gold px-4 py-3 flex items-center gap-3">
+        <button
+          type="button"
+          onClick={t("cloudSync")}
+          className="card-gold w-full px-4 py-3 flex items-center gap-3 text-left"
+        >
           <CloudIcon className="h-5 w-5 text-gold-200" />
           <div className="flex-1">
             <p className="text-[13px] tracking-[0.18em] text-cream">
@@ -70,8 +74,8 @@ export default function SettingsPage() {
               Синхронизация с облаком
             </p>
           </div>
-          <Toggle on={settings.cloudSync} onChange={t("cloudSync")} label="Облако" />
-        </section>
+          <ChevronRight className="h-4 w-4 text-gold-200" />
+        </button>
 
         {/* Notifications */}
         <section className="card-gold px-4 py-3">
@@ -122,9 +126,9 @@ export default function SettingsPage() {
               </span>
               <Toggle on={settings.cameraAccess} onChange={t("cameraAccess")} label="Камера" />
             </div>
-            <button className="rounded-full border border-gold-200/60 bg-black/30 px-3 py-1 text-[10px] tracking-widest text-gold-200 flex items-center justify-between gap-2">
+            <button className="rounded-full border border-gold-200/60 bg-black/30 px-2.5 py-1 text-[9.5px] tracking-wider text-gold-200 flex items-center justify-center gap-1 whitespace-nowrap">
               <span>Очистить кэш (1.2 ГБ)</span>
-              <ChevronRight className="h-3.5 w-3.5" />
+              <ChevronRight className="h-3 w-3 shrink-0" />
             </button>
           </div>
         </section>

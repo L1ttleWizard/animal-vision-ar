@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { AnimalId } from "@/data/animals";
 
 type Props = {
@@ -6,12 +7,37 @@ type Props = {
   className?: string;
 };
 
+const PNG_ANIMALS: ReadonlySet<AnimalId> = new Set([
+  "cat",
+  "dog",
+  "eagle",
+  "wolf",
+  "fox",
+  "bear",
+  "owl",
+  "zebra",
+]);
+
 /**
  * Stylised circular animal head emblems used in the gallery / profile / chat
  * lists.  Each is a tiny illustration tuned to look at home on the dark green
  * background.
  */
 export function AnimalHead({ animal, size = 80, className }: Props) {
+  if (PNG_ANIMALS.has(animal)) {
+    return (
+      <Image
+        src={`/animals/${animal}.png`}
+        alt=""
+        width={size}
+        height={size}
+        className={className}
+        style={{ width: size, height: size, objectFit: "contain" }}
+        priority
+      />
+    );
+  }
+
   const common = {
     width: size,
     height: size,
