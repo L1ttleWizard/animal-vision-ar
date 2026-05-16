@@ -39,7 +39,7 @@ export default function IdentifyPage() {
       </div>
 
       {/* Wheel area */}
-      <div className="relative shrink-0 px-3 pt-4 pb-3 bg-gradient-to-t from-[#1f2a13]/95 via-[#1f2a13]/85 to-transparent">
+      <div className="relative shrink-0 px-3 pt-4 pb-24 bg-gradient-to-t from-[#1f2a13]/95 via-[#1f2a13]/85 to-transparent">
         <div className="overflow-x-auto no-scrollbar px-2">
           <ul className="flex items-end gap-4 justify-center min-w-max">
             {wheel.map((a) => {
