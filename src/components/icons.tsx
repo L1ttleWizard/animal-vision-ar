@@ -406,3 +406,59 @@ export function CompassIcon({ className, ...props }: IconProps) {
     </svg>
   );
 }
+
+export function DeerHeadIcon({ className, ...props }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 64 64"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      {...props}
+    >
+      <g strokeWidth="1.3">
+        {/* outer faint compass ring */}
+        <circle cx="32" cy="32" r="27" opacity="0.5" />
+        {/* tick marks at N, S, E, W */}
+        <line x1="32" y1="5" x2="32" y2="9" opacity="0.7" />
+        <line x1="32" y1="55" x2="32" y2="59" opacity="0.7" />
+        <line x1="5" y1="32" x2="9" y2="32" opacity="0.7" />
+        <line x1="55" y1="32" x2="59" y2="32" opacity="0.7" />
+      </g>
+      {/* stag head — front view, fills most of the inner circle */}
+      <g strokeWidth="1.7">
+        {/* left antler — main beam + 3 tines */}
+        <path d="M27 22 C 25 17 22 13 19 11" />
+        <path d="M24 18 C 21 16 17 16 14 18" />
+        <path d="M22 16 C 18 14 15 13 12 13" />
+        <path d="M20 13 C 17 9 15 7 13 6" />
+        {/* right antler — mirror */}
+        <path d="M37 22 C 39 17 42 13 45 11" />
+        <path d="M40 18 C 43 16 47 16 50 18" />
+        <path d="M42 16 C 46 14 49 13 52 13" />
+        <path d="M44 13 C 47 9 49 7 51 6" />
+        {/* skull line between antler bases */}
+        <path d="M27 22 C 29 21 35 21 37 22" />
+        {/* head outline — narrow forehead, full cheeks, rounded muzzle */}
+        <path d="M27 22
+                 C 23 27 22 33 24 40
+                 C 26 47 30 51 32 52
+                 C 34 51 38 47 40 40
+                 C 42 33 41 27 37 22" />
+        {/* eyes */}
+        <circle cx="28" cy="33" r="1.1" fill="currentColor" stroke="none" />
+        <circle cx="36" cy="33" r="1.1" fill="currentColor" stroke="none" />
+        {/* muzzle ridge */}
+        <path d="M32 36 L 32 44" opacity="0.7" />
+        {/* nose */}
+        <path d="M29 46 C 30 49 34 49 35 46" />
+        {/* ears */}
+        <path d="M24 24 C 19 24 16 27 16 32 C 20 31 23 29 25 27" opacity="0.85" />
+        <path d="M40 24 C 45 24 48 27 48 32 C 44 31 41 29 39 27" opacity="0.85" />
+      </g>
+    </svg>
+  );
+}
