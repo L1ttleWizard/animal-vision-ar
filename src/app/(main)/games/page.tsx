@@ -20,8 +20,8 @@ export default function GamesPage() {
           const unlockedFlag = isUnlocked(g);
           return (
             <li key={g.id} className="card-gold overflow-hidden">
-              <div className="grid grid-cols-[120px_1fr] gap-3 p-3">
-                <div className="relative h-[110px] rounded-lg overflow-hidden border border-gold-200/30">
+              <div className="grid grid-cols-[140px_1fr] gap-3 p-3">
+                <div className="relative h-[140px] rounded-lg overflow-hidden border border-gold-200/30">
                   <GameThumb id={g.id} />
                   {g.id === "bee-vision" && (
                     <div className="absolute bottom-1 left-1.5 rounded bg-black/55 px-1.5 py-0.5 text-[9px] tracking-wider text-gold-100">
@@ -34,26 +34,24 @@ export default function GamesPage() {
                     </div>
                   )}
                 </div>
-                <div className="flex flex-col justify-between gap-1">
-                  <div>
-                    <div className="flex items-center gap-1.5">
-                      {!unlockedFlag && (
-                        <PadlockIcon className="h-3.5 w-3.5 text-cream/85" />
-                      )}
-                      <p className="text-[10px] tracking-[0.22em] text-gold-200">
-                        {unlockedFlag ? "РАЗБЛОКИРОВАНО" : "ЗАБЛОКИРОВАНО"}
-                      </p>
-                    </div>
+                <div className="flex flex-col items-end gap-2 text-right">
+                  <div className="flex items-center gap-1.5">
                     {!unlockedFlag && (
-                      <p className="flex items-center gap-1 text-[12px] text-gold-200 mt-0.5">
-                        <span>{g.price}</span>
-                        <CoinIcon className="h-3.5 w-3.5" />
-                      </p>
+                      <PadlockIcon className="h-3.5 w-3.5 text-cream/85" />
                     )}
-                    <h2 className="mt-1 text-[14px] font-semibold tracking-[0.16em] text-cream">
-                      {g.title}
-                    </h2>
+                    <p className="text-[10px] tracking-[0.22em] text-gold-200">
+                      {unlockedFlag ? "РАЗБЛОКИРОВАНО" : "ЗАБЛОКИРОВАНО"}
+                    </p>
                   </div>
+                  {!unlockedFlag && (
+                    <p className="-mt-1.5 flex items-center gap-1 text-[12px] text-gold-200">
+                      <span>{g.price}</span>
+                      <CoinIcon className="h-3.5 w-3.5" />
+                    </p>
+                  )}
+                  <h2 className="mt-auto w-full text-center text-[14px] font-semibold tracking-[0.16em] text-cream">
+                    {g.title}
+                  </h2>
                   <button
                     onClick={() =>
                       unlockedFlag && g.id === "snake-hunt"
@@ -61,7 +59,7 @@ export default function GamesPage() {
                         : null
                     }
                     disabled={!unlockedFlag}
-                    className="pill-gold disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="pill-gold w-full max-w-[170px] mx-auto disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     {g.buttonLabel}
                   </button>
