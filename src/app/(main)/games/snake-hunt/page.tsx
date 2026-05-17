@@ -16,8 +16,8 @@ type Mouse = {
   alive: boolean;
 };
 
-const ROUND_SECONDS = 30;
-const PREY_COUNT = 7;
+const ROUND_SECONDS = 15;
+const PREY_COUNT = 8;
 
 // Mouse PNG is 338×660 (≈ 0.512 aspect). Box width is derived from height.
 const MOUSE_ASPECT = 338 / 660;
@@ -25,7 +25,7 @@ const MOUSE_ASPECT = 338 / 660;
 // Meadow band — empirically the lower part of thermal_background.jpg
 // (above this is the tree line / sky). Keep mice inside this band so they
 // look like they sit on the grass.
-const MEADOW_Y_MIN = 50; // % from top of play area
+const MEADOW_Y_MIN = 38; // % from top of play area
 const MEADOW_Y_MAX = 90; // % from top of play area
 
 function makePrey(count: number): Mouse[] {
