@@ -120,7 +120,7 @@ function MeadowBase({
 function CatLowLightScene() {
   return (
     <video width="full" height="full
-    " autoPlay loop muted  preload="none">
+    " autoPlay loop muted  preload="auto">
     <source src="/videos/cat_video.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
@@ -244,7 +244,7 @@ function EagleScene() {
 function DichromatScene() {
   return (
     <video width="full" height="full
-    " autoPlay loop muted preload="none">
+    " autoPlay loop muted preload="auto">
     <source src="/videos/dog_video.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
