@@ -5,6 +5,7 @@ import { GAMES, type GameMeta } from "@/data/games";
 import { CoinIcon, PadlockIcon } from "@/components/icons";
 import { ScreenContainer } from "@/components/ScreenContainer";
 import { useAppSelector } from "@/store/hooks";
+import Image from "next/image";
 
 export default function GamesPage() {
   const router = useRouter();
@@ -84,76 +85,22 @@ function GameThumb({ id }: { id: GameMeta["id"] }) {
     case "snake-hunt":
       return (
         <div className="h-full w-full bg-[#0e2c6b] relative">
-          <svg viewBox="0 0 120 110" className="absolute inset-0 h-full w-full">
-            <defs>
-              <radialGradient id="g1-hot" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#fff39c" />
-                <stop offset="50%" stopColor="#ff7b3d" />
-                <stop offset="100%" stopColor="#a8120c" stopOpacity="0" />
-              </radialGradient>
-            </defs>
-            <rect width="120" height="110" fill="#0e2c6b" />
-            <ellipse cx="40" cy="35" rx="40" ry="25" fill="#1a3aa3" opacity="0.7" />
-            <ellipse cx="90" cy="80" rx="40" ry="30" fill="#3b67d4" opacity="0.6" />
-            <ellipse cx="55" cy="65" rx="15" ry="10" fill="url(#g1-hot)" />
-            <text x="58" y="92" fontSize="9" fill="#fff" opacity="0.7">
-              N
-            </text>
-          </svg>
+          <Image src={'/snake_hunt.png'} width={120} height={110} alt={'snake_hunt'}className="absolute inset-0 h-full w-full"></Image>
         </div>
       );
     case "bee-vision":
       return (
-        <div className="h-full w-full bg-gradient-to-b from-[#36206e] to-[#0e0625] relative">
-          <svg viewBox="0 0 120 110" className="absolute inset-0 h-full w-full">
-            <defs>
-              <pattern id="thumbHex" width="20" height="18" patternUnits="userSpaceOnUse">
-                <polygon
-                  points="10,1 19,6 19,15 10,20 1,15 1,6"
-                  fill="none"
-                  stroke="#8C5BD9"
-                  strokeOpacity="0.5"
-                  strokeWidth="0.7"
-                />
-              </pattern>
-            </defs>
-            <rect width="120" height="110" fill="url(#thumbHex)" />
-            <circle cx="60" cy="55" r="22" fill="#c1a1ff" opacity="0.65" />
-            <circle cx="60" cy="55" r="10" fill="#fff8a8" />
-          </svg>
+        <div className="h-full w-full bg-linear-to-b from-[#36206e] to-[#0e0625] relative">
+          <Image src={'/bee_vision.png'} width={120} height={110} alt="bee_vision" className="absolute inset-0 h-full w-full"></Image>
         </div>
       );
     case "predator-reflex":
       return (
-        <div className="h-full w-full bg-gradient-to-b from-[#0a0f08] to-[#020401] relative">
-          <svg viewBox="0 0 120 110" className="absolute inset-0 h-full w-full">
-            <rect width="120" height="110" fill="#0a0f08" />
-            <path
-              d="M0 80 Q30 75 60 78 T120 80 L120 110 L0 110z"
-              fill="#1a2410"
-            />
-            <circle cx="95" cy="22" r="9" fill="#dfe9c9" opacity="0.85" />
-            <line
-              x1="20"
-              y1="75"
-              x2="80"
-              y2="55"
-              stroke="#fff"
-              strokeWidth="0.8"
-              opacity="0.6"
-            />
-            <circle cx="80" cy="55" r="2" fill="#fff" />
-            <text
-              x="100"
-              y="100"
-              fontSize="8"
-              fill="#F4D67A"
-              textAnchor="end"
-            >
-              +
-            </text>
-          </svg>
+        <div className="h-full w-full bg-linear-to-b from-[#0a0f08] to-[#020401] relative">
+          <Image src={'/predator_reflex.png'} width={120} height={110} alt="predator_reflex" className="absolute inset-0 h-full w-full"></Image>
+          
         </div>
       );
   }
 }
+  

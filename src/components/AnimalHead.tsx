@@ -16,6 +16,10 @@ const PNG_ANIMALS: ReadonlySet<AnimalId> = new Set([
   "bear",
   "owl",
   "zebra",
+  "elephant",
+  "snake",
+  "bee",
+  "horse"
 ]);
 
 /**
