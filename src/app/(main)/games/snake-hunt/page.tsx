@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ScreenHeader } from "@/components/ScreenHeader";
 import { useAppDispatch } from "@/store/hooks";
 import { addCoins, addXp } from "@/store/slices/profileSlice";
+import Image from "next/image";
 
 type Prey = { id: number; x: number; y: number; alive: boolean; size: number };
 
@@ -81,7 +82,7 @@ export default function SnakeHuntPage() {
         </span>
       </div>
 
-      <div className="relative mx-4 mt-2 flex-1 rounded-2xl border border-gold-200/30 overflow-hidden">
+      <div className="relative mx-4 mt-2 flex-1 rounded-2xl border border-gold-200/30 overflow-hidden flex items-center justify-center bg-[#01378a]">
         <ThermalField />
         {prey.map((p) => (
           <button
@@ -139,22 +140,8 @@ export default function SnakeHuntPage() {
 
 function ThermalField() {
   return (
-    <svg
-      viewBox="0 0 393 600"
-      preserveAspectRatio="xMidYMid slice"
-      className="absolute inset-0 h-full w-full"
-    >
-      <defs>
-        <radialGradient id="cold-edge" cx="50%" cy="50%" r="80%">
-          <stop offset="60%" stopColor="#0e2c6b" stopOpacity="0" />
-          <stop offset="100%" stopColor="#040b25" />
-        </radialGradient>
-      </defs>
-      <rect width="393" height="600" fill="#0e2c6b" />
-      <ellipse cx="120" cy="180" rx="180" ry="120" fill="#1a3aa3" opacity="0.7" />
-      <ellipse cx="300" cy="420" rx="170" ry="110" fill="#3b67d4" opacity="0.55" />
-      <ellipse cx="200" cy="540" rx="220" ry="60" fill="#5a85e8" opacity="0.35" />
-      <rect width="393" height="600" fill="url(#cold-edge)" />
-    </svg>
+    <div className="flex items-center justify-center align-middle">
+    <Image src={'/snake_hunt.png'} width={300} height={300}  alt={'snake_hunt'} className=""></Image>
+    </div>
   );
 }
