@@ -119,21 +119,11 @@ function MeadowBase({
 
 function CatLowLightScene() {
   return (
-    <div className="absolute inset-0 bg-gradient-to-b from-[#3d3d2f] to-[#1d1d14]">
-      <MeadowBase
-        skyFrom="#5b5a47"
-        skyTo="#3a3a2c"
-        grassFrom="#7a755c"
-        grassTo="#3c3a27"
-      />
-      {/* Glowing eye spots */}
-      <div className="absolute top-[55%] left-[60%] flex gap-1">
-        <span className="h-2.5 w-2.5 rounded-full bg-amber-300 shadow-[0_0_10px_rgba(255,200,80,0.8)]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-amber-300 shadow-[0_0_10px_rgba(255,200,80,0.8)]" />
-      </div>
-      {/* Sparkle dots simulating tapetum reflections */}
-      <div className="absolute inset-0 sparkles-bg opacity-70" />
-    </div>
+    <video width="full" height="full
+    " autoPlay loop muted  preload="none">
+    <source src="/videos/cat_video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
   );
 }
 
@@ -253,13 +243,10 @@ function EagleScene() {
 
 function DichromatScene() {
   return (
-    <div className="absolute inset-0 bg-gradient-to-b from-[#3c6fa6] to-[#1c2c2a]">
-      <MeadowBase
-        skyFrom="#5e8ec0"
-        skyTo="#3c6fa6"
-        grassFrom="#a89a4c"
-        grassTo="#2f311a"
-      />
-    </div>
+    <video width="full" height="full
+    " autoPlay loop muted preload="none">
+    <source src="/videos/dog_video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
   );
 }
