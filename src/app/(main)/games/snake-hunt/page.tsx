@@ -1,28 +1,51 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import { ScreenHeader } from "@/components/ScreenHeader";
 import { useAppDispatch } from "@/store/hooks";
 import { addCoins, addXp } from "@/store/slices/profileSlice";
-import Image from "next/image";
 
-type Prey = { id: number; x: number; y: number; alive: boolean; size: number };
+type Mouse = {
+  id: number;
+  x: number; // % from left of play area
+  y: number; // % from top of play area (always within meadow band)
+  height: number; // px — mouse png is portrait (≈ 0.51 aspect)
+  rotation: number; // deg
+  flip: boolean; // mirror horizontally
+  alive: boolean;
+};
 
 const ROUND_SECONDS = 30;
+const PREY_COUNT = 7;
 
-function makePrey(count: number): Prey[] {
-  return Array.from({ length: count }).map((_, i) => ({
-    id: i + 1,
-    x: 10 + Math.random() * 80,
-    y: 15 + Math.random() * 70,
-    alive: true,
-    size: 22 + Math.random() * 18,
-  }));
+// Mouse PNG is 338×660 (≈ 0.512 aspect). Box width is derived from height.
+const MOUSE_ASPECT = 338 / 660;
+
+// Meadow band — empirically the lower part of thermal_background.jpg
+// (above this is the tree line / sky). Keep mice inside this band so they
+// look like they sit on the grass.
+const MEADOW_Y_MIN = 50; // % from top of play area
+const MEADOW_Y_MAX = 90; // % from top of play area
+
+function makePrey(count: number): Mouse[] {
+  return Array.from({ length: count }).map((_, i) => {
+    const t = Math.random(); // depth: 0 = far (small, near horizon), 1 = close (big, near bottom)
+    return {
+      id: i + 1,
+      x: 8 + Math.random() * 84,
+      y: MEADOW_Y_MIN + t * (MEADOW_Y_MAX - MEADOW_Y_MIN),
+      height: 44 + t * 60, // 44..104 px — small in the distance, large up close
+      rotation: -180 + Math.random() * 360, // any angle
+      flip: Math.random() < 0.5,
+      alive: true,
+    };
+  });
 }
 
 export default function SnakeHuntPage() {
   const dispatch = useAppDispatch();
-  const [prey, setPrey] = useState<Prey[]>(() => makePrey(7));
+  const [prey, setPrey] = useState<Mouse[]>(() => makePrey(PREY_COUNT));
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(ROUND_SECONDS);
   const claimed = useRef(false);
@@ -59,7 +82,7 @@ export default function SnakeHuntPage() {
 
   const restart = () => {
     claimed.current = false;
-    setPrey(makePrey(7));
+    setPrey(makePrey(PREY_COUNT));
     setScore(0);
     setTime(ROUND_SECONDS);
   };
@@ -75,15 +98,26 @@ export default function SnakeHuntPage() {
 
       <div className="px-4 mt-2 flex items-center justify-between text-[11px] tracking-widest">
         <span className="text-cream/85">
-          ЦЕЛЕЙ: <span className="text-gold-200 font-semibold">{score}/{total}</span>
+          ЦЕЛЕЙ:{" "}
+          <span className="text-gold-200 font-semibold">
+            {score}/{total}
+          </span>
         </span>
         <span className="text-cream/85">
           ВРЕМЯ: <span className="text-gold-200 font-semibold">{time}с</span>
         </span>
       </div>
 
-      <div className="relative mx-4 mt-2 flex-1 rounded-2xl border border-gold-200/30 overflow-hidden flex items-center justify-center bg-[#01378a]">
-        <ThermalField />
+      <div className="relative mx-4 mt-2 flex-1 rounded-2xl border border-gold-200/30 overflow-hidden">
+        <Image
+          src="/thermal_background.jpg"
+          alt="Термальное поле"
+          fill
+          priority
+          sizes="(max-width: 480px) 100vw, 360px"
+          className="object-cover object-bottom select-none pointer-events-none"
+        />
+
         {prey.map((p) => (
           <button
             key={p.id}
@@ -92,22 +126,21 @@ export default function SnakeHuntPage() {
             style={{
               left: `${p.x}%`,
               top: `${p.y}%`,
-              width: p.size,
-              height: p.size * 0.7,
-              transform: "translate(-50%, -50%)",
+              width: p.height * MOUSE_ASPECT,
+              height: p.height,
+              transform: `translate(-50%, -50%) rotate(${p.rotation}deg) scaleX(${p.flip ? -1 : 1})`,
             }}
-            className={`absolute rounded-full transition-opacity duration-300 ${
+            className={`absolute transition-opacity duration-300 ${
               p.alive ? "opacity-100" : "opacity-0 pointer-events-none"
             }`}
-            aria-label="Цель"
+            aria-label="Мышь"
           >
-            <span
-              className="absolute inset-0 rounded-full"
-              style={{
-                background:
-                  "radial-gradient(circle, #fff39c 0%, #ff7b3d 50%, rgba(168,18,12,0) 80%)",
-                boxShadow: "0 0 14px rgba(255,123,61,0.7)",
-              }}
+            <Image
+              src="/mouse.png"
+              alt=""
+              fill
+              sizes="60px"
+              className="object-contain drop-shadow-[0_0_10px_rgba(255,123,61,0.55)]"
             />
           </button>
         ))}
@@ -118,11 +151,16 @@ export default function SnakeHuntPage() {
               {alive === 0 ? "ВСЕ ЦЕЛИ ПОЙМАНЫ" : "ВРЕМЯ ВЫШЛО"}
             </p>
             <p className="text-cream text-[14px]">
-              Очки: <span className="font-semibold">{score}/{total}</span>
+              Очки:{" "}
+              <span className="font-semibold">
+                {score}/{total}
+              </span>
             </p>
             <p className="text-cream/85 text-[12px]">
-              Награда: <span className="text-gold-200 font-semibold">+{reward.coins}</span>{" "}
-              исследования, <span className="text-gold-200 font-semibold">+{reward.xp}</span> XP
+              Награда:{" "}
+              <span className="text-gold-200 font-semibold">+{reward.coins}</span>{" "}
+              исследования,{" "}
+              <span className="text-gold-200 font-semibold">+{reward.xp}</span> XP
             </p>
             <button onClick={restart} className="pill-gold mt-1">
               СЫГРАТЬ ЕЩЁ
@@ -132,16 +170,8 @@ export default function SnakeHuntPage() {
       </div>
 
       <p className="px-6 pt-3 pb-24 text-[11px] text-cream/70 leading-relaxed">
-        Тёплые цели подсвечены оранжевым. Тапни по добыче, пока время не вышло.
+        Тёплые цели подсвечены на поляне. Тапни по мыши, пока время не вышло.
       </p>
-    </div>
-  );
-}
-
-function ThermalField() {
-  return (
-    <div className="flex items-center justify-center align-middle">
-    <Image src={'/snake_hunt.png'} width={300} height={300}  alt={'snake_hunt'} className=""></Image>
     </div>
   );
 }
